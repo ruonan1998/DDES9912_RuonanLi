@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class SlotMachineWheels : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,8 +16,6 @@ public class SlotMachineWheels : MonoBehaviour
     public float spintimer = 2f;
     public float forceFactor = 10;
     public float randomComponent = 0;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -78,4 +75,6 @@ public class SlotMachineWheels : MonoBehaviour
         yield return new WaitForSeconds(delay);
         StopAxis(Vector3.forward, 0f); 
     }
+
+    
 }
