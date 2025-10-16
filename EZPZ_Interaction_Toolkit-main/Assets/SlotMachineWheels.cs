@@ -16,6 +16,8 @@ public class SlotMachineWheels : MonoBehaviour
     public float spintimer = 2f;
     public float forceFactor = 10;
     public float randomComponent = 0;
+    public Transform[] stoppoints;
+    public Transform arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +70,11 @@ public class SlotMachineWheels : MonoBehaviour
     private void StopAxis(Vector3 axis, float force)
     {
         rBody.isKinematic = true;
+        if (stoppoints.Length == 0) return;
+        int stopindex = Random.Range(0, stoppoints.Length);
+        Vector3 currentEuller = transform.localEulerAngles;
+        float targetx = stoppoints[stopindex].localEulerAngles.z;
+        transform.localEulerAngles = new Vector3(targetx, currentEuller.y, currentEuller.z);
     }
 
     IEnumerator StopAfterTime(float delay)
@@ -75,6 +82,5 @@ public class SlotMachineWheels : MonoBehaviour
         yield return new WaitForSeconds(delay);
         StopAxis(Vector3.forward, 0f); 
     }
-
     
 }
