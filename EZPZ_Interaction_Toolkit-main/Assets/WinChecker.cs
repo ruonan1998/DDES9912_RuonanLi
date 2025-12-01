@@ -15,6 +15,9 @@ public class WinChecker : MonoBehaviour
     public  Light RedLight;
     public  Light GreenLight;
     public  Light YellowLight;
+    public  AudioSource winAudioSource1;
+    public  AudioSource winAudioSource2;
+    public  AudioSource winAudioSource3;
     public void CheckWin()
     {
         int a = wheel1.laststopindex;
@@ -102,6 +105,21 @@ public class WinChecker : MonoBehaviour
         else if(message.Contains("Jackpot"))
         {
             SetActiveForDuration(RedLight.gameObject, 3f);
+        }
+
+        if(message.Contains("Small win"))
+        {
+            winAudioSource3.Play();
+        }
+
+        if(message.Contains("You win") || message.Contains("Jackpot"))
+        {
+            winAudioSource2.Play();
+        }
+
+        if(message.Contains("Jackpot"))
+        {
+            winAudioSource1.Play();
         }
         
     }   
