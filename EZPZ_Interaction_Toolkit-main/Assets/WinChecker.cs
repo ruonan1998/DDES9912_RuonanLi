@@ -27,20 +27,17 @@ public class WinChecker : MonoBehaviour
         if (a == berryindex && b == berryindex && c == berryindex)
         {
             StartCoroutine(ShowResultDelayed("Jackpot!!! 100", 6f));
-            SpawnCoins(10);
             return;
         }
         
         if (a == b && b == c)
         {
             StartCoroutine(ShowResultDelayed("You win! 50", 6f));
-            SpawnCoins(5);
             return;
         }
         if (a == b || b == c || a == c) 
         {
             StartCoroutine(ShowResultDelayed("Small win! 20", 6f));
-            SpawnCoins(2);
             return;
         }
 
@@ -94,7 +91,6 @@ public class WinChecker : MonoBehaviour
         SpawnCoins(2);
         
         if(message.Contains("Small win"))
-
         {
             SetActiveForDuration(YellowLight.gameObject, 3f);
         }
@@ -111,12 +107,10 @@ public class WinChecker : MonoBehaviour
         {
             winAudioSource3.Play();
         }
-
         if(message.Contains("You win") || message.Contains("Jackpot"))
         {
             winAudioSource2.Play();
         }
-
         if(message.Contains("Jackpot"))
         {
             winAudioSource1.Play();
