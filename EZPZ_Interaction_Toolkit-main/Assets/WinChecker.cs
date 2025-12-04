@@ -8,7 +8,6 @@ using TMPro;
 public class WinChecker : MonoBehaviour
 {
     public SlotMachineWheels wheel1, wheel2, wheel3;
-    public int berryindex = 0;
     public  TextMeshProUGUI resultText;
     public  GameObject Coin;
     public  GameObject CoinSpawnPoint; 
@@ -18,13 +17,16 @@ public class WinChecker : MonoBehaviour
     public  AudioSource winAudioSource1;
     public  AudioSource winAudioSource2;
     public  AudioSource winAudioSource3;
+
     public void CheckWin()
     {
-        int a = wheel1.laststopindex;
-        int b = wheel2.laststopindex;
-        int c = wheel3.laststopindex;
+        var a = wheel1.lastFruit;
+        var b = wheel2.lastFruit;
+        var c = wheel3.lastFruit;
         
-        if (a == berryindex && b == berryindex && c == berryindex)
+        if (a == SlotMachineWheels.FruitType.Berry &&
+            b == SlotMachineWheels.FruitType.Berry &&
+            c == SlotMachineWheels.FruitType.Berry)
         {
             StartCoroutine(ShowResultDelayed("Jackpot!!! 100", 6f));
             return;
@@ -49,15 +51,8 @@ public class WinChecker : MonoBehaviour
 
     private IEnumerator ShowResultDelayed(string message, float delay)
     {
-        yield return new WaitForSeconds(delay);
-        if (message == "")
-        {
-            ShowResult("");
-        }
-        else
-        {
-            ShowResult(message);
-        }
+    yield return new WaitForSeconds(delay);
+    ShowResult(message);
     }
 
     private void SetActiveForDuration(GameObject obj, float duration)

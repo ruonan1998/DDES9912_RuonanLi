@@ -19,7 +19,10 @@ public class SlotMachineWheels : MonoBehaviour
     public float randomComponent = 0;
     public Transform[] stoppoints;
     public Transform arrow;
-    public int laststopindex;
+    public enum FruitType { Apple, Lemon, Banana, Grape, Berry, Melon, Orange, Pear }
+    public FruitType lastFruit;
+    public FruitType laststoppedfruit;
+    public string lastFruitName = "";
 
     // Start is called before the first frame update
     void Start()
@@ -74,17 +77,27 @@ public class SlotMachineWheels : MonoBehaviour
     rBody.isKinematic = true;
     if (stoppoints.Length == 0) return;
     int stopindex = Random.Range(0, stoppoints.Length);
-    laststopindex = stopindex;
+    laststoppedfruit = (FruitType)stopindex;
     Vector3 currentEuller = transform.localEulerAngles;
     float targetx = stoppoints[stopindex].localEulerAngles.z;
     transform.localEulerAngles = new Vector3(targetx, currentEuller.y, currentEuller.z);
+    lastFruit = (FruitType)stopindex;
     }
-
-
 
     IEnumerator StopAfterTime(float delay)
     {
     yield return new WaitForSeconds(delay);
     StopAxis(Vector3.forward, 0f);
     }
+
+    void LateUpdate()
+{
+    if (!string.IsNullOrEmpty(lastFruitName))
+    {
+        if (System.Enum.TryParse(lastFruitName, out FruitType f))
+        {
+            lastFruit = f;
+        }
+    }
+}
 }
